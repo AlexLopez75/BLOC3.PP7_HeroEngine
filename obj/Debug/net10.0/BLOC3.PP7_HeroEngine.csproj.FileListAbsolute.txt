@@ -1,0 +1,15 @@
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\bin\Debug\net10.0\BLOC3.PP7_HeroEngine.exe
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\bin\Debug\net10.0\BLOC3.PP7_HeroEngine.deps.json
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\bin\Debug\net10.0\BLOC3.PP7_HeroEngine.runtimeconfig.json
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\bin\Debug\net10.0\BLOC3.PP7_HeroEngine.dll
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\bin\Debug\net10.0\BLOC3.PP7_HeroEngine.pdb
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.AssemblyInfoInputs.cache
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.AssemblyInfo.cs
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.csproj.CoreCompileInputs.cache
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.sourcelink.json
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.dll
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\refint\BLOC3.PP7_HeroEngine.dll
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.pdb
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\BLOC3.PP7_HeroEngine.genruntimeconfig.cache
+C:\Users\alexl\RiderProjects\BLOC3.PP7_HeroEngine\obj\Debug\net10.0\ref\BLOC3.PP7_HeroEngine.dll
