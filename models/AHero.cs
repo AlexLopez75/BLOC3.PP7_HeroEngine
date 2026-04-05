@@ -8,13 +8,21 @@ public abstract class AHero
     protected int MaxHp { get; set; }
     protected int Power { get; set; }
 
-    protected AHero(string name, int level, int currentHp, int maxHp, int power)
+    protected AHero(string name, int level, int baseMaxHp, int basePower)
     {
         Name = name;
         Level = level;
-        CurrentHp = currentHp;
-        MaxHp = maxHp;
-        Power = power;
+        if (level > 1)
+        {
+            MaxHp = (int)(baseMaxHp + baseMaxHp * 0.2 * (level - 1));
+            Power = (int)(basePower + basePower * 0.1 * (level - 1));
+        }
+        else
+        {
+            MaxHp = baseMaxHp;
+            Power = basePower;
+        }
+        CurrentHp = MaxHp;
     }
 
     public abstract string Greeting();
