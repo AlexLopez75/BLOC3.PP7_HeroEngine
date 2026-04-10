@@ -2,38 +2,32 @@
 
 public class Rogue : AHero
 {
+    public const string toStringMSG = "| Damage multiplier: {0} | Daggers: {1}";
+    public const string defAttackMSG = "{0} is defeated and can't attack!";
+    public const string attackMSG = "{0} attacks! -> Base damage: {1}, Multiplier: {2} -> Deals {3} damage.";
+
     public int MultDamage { get; set; }
     public int NumDaggers { get; set; }
 
-    public Rogue(string name, int level, int maxHp, int power, int multDamage, int numDaggers) : base(name, level,maxHp, power)
+    public Rogue(string name, int numDaggers) : base(name)
     {
-        MultDamage = multDamage;
+        MaxHp = 170;
+        CurrentHp = MaxHp;
+        Power = 15;
+        MultDamage = 3;
         NumDaggers = numDaggers;
     }
 
-    public override string Greeting() => $"[Rogue] {Name} | Level: {Level} | HP: {CurrentHp}/{MaxHp} | Damage Multiplier: {MultDamage} | Daggers: {NumDaggers} ]";
-
-    public override int Attack()
+    public override string ToString() => base.ToString() + String.Format(toStringMSG, MultDamage, NumDaggers );
+    
+    public int Attack()
     {
         if (CurrentHp <= 0)
         {
-            Console.WriteLine($"{Name} is defeated and can't attack!");
+            Console.WriteLine(defAttackMSG, Name);
             return 0;
         }
-        
-        Console.WriteLine($"{Name} attacks! Deals {Power * MultDamage} damage.");
-        return Power * MultDamage;
-    }
-
-    public override int TakeDamage(int damage)
-    {
-        if (CurrentHp <= 0)
-        {
-            Console.WriteLine($"{Name} is defeated and can't receive damage!");
-            return 0;
-        }
-        CurrentHp = Math.Max(0, CurrentHp - damage);
-        Console.WriteLine($"{Name} receives {damage} | HP:{CurrentHp}/{MaxHp}");
-        return CurrentHp;
+        Console.WriteLine(attackMSG, Name, Power, MultDamage, Power * MultDamage);
+        return Power * MultDamage;   
     }
 }
