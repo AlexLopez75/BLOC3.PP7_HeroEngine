@@ -2,42 +2,23 @@
 
 public class Mage : AHero
 {
+    public const string toStringMSG = "| Mana: {0}/{1} | Arch level: {2}";
+    
     public int CurrentMana { get; set; }
     public int MaxMana { get; set; }
     public int ArchLevel { get; set; }
 
-    public Mage(string name, int level, int maxHp, int power, int baseMaxMana, int arcLevel) : base(name, level, maxHp, power)
+    public Mage(string name, int maxMana) : base(name)
     {
-        if (level > 1) MaxMana = (int)(baseMaxMana + baseMaxMana * 0.1 * (level - 1));
-        else MaxMana = baseMaxMana;
+        /*if (level > 1) MaxMana = (int)(baseMaxMana + baseMaxMana * 0.1 * (level - 1));
+        else MaxMana = baseMaxMana;*/
+        MaxHp = 200;
+        CurrentHp = MaxHp;
+        Power = 20;
+        MaxMana = 30;
         CurrentMana = MaxMana;
-        ArchLevel = arcLevel;
+        ArchLevel = 1;
     }
 
-    public override string Greeting() => $"[Mage] {Name} | Level: {Level} | HP: {CurrentHp}/{MaxHp} | Mana: {CurrentMana}/{MaxMana} | Arch Level: {ArchLevel} ]";
-    
-    
-    public override int Attack()
-    {
-        if (CurrentHp <= 0)
-        {
-            Console.WriteLine($"{Name} is defeated and can't attack!");
-            return 0;
-        }
-        
-        Console.WriteLine($"{Name} attacks! Deals {Power * 2} damage.");
-        return Power;
-    }
-
-    public override int TakeDamage(int damage)
-    {
-        if (CurrentHp <= 0)
-        {
-            Console.WriteLine($"{Name} is defeated and can't receive damage!");
-            return 0;
-        }
-        CurrentHp = Math.Max(0, CurrentHp - damage);
-        Console.WriteLine($"{Name} receives {damage} | HP:{CurrentHp}/{MaxHp}");
-        return CurrentHp;
-    }
+    public override string ToString() => base.ToString() + String.Format(toStringMSG, CurrentMana, MaxMana, ArchLevel);
 }
