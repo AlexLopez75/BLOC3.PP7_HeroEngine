@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BLOC3.PP7_HeroEngine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29b01a0f019989e79abc3b7c74cd11c21eec6432")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0c5c94c2985bfd2283a7cc08e1dac099b331d38")]
 [assembly: System.Reflection.AssemblyProductAttribute("BLOC3.PP7_HeroEngine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BLOC3.PP7_HeroEngine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
