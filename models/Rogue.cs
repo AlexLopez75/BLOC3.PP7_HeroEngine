@@ -14,6 +14,7 @@ public class Rogue : ACharacter
         MaxHp = 170;
         CurrentHp = MaxHp;
         Power = 15;
+        Defense = 25;
         MultDamage = 3;
         NumDaggers = numDaggers;
     }
