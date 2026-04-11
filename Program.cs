@@ -8,32 +8,48 @@ namespace BLOC3.PP7_HeroEngine
     {
         public static void Main()
         {
-            ACharacter warrior = new Warrior("Link", "'Hyaa!'");
-            ACharacter mage = new Mage("Ela");
-            ACharacter rogue = new Rogue("Elding", 10);
-
-            Console.WriteLine(warrior.Greeting());
-            Console.WriteLine(mage.Greeting());
-            Console.WriteLine(rogue.Greeting());
-
-            Console.WriteLine();
+            Mage mage = new Mage("Ela");
             
-            warrior.Attack();
-            mage.Attack();
-            rogue.Attack();
+            Ability fireball = new Ability(RarityType.RARE, "Fireball", AbilityType.Attack);
+            Ability iceShield = new Ability(RarityType.COMMON, "Ice shield", AbilityType.Defense);
+            Ability megaHeal = new Ability(RarityType.EPIC, "Mega heal", AbilityType.Healing);
+            Ability attackUp = new Ability(RarityType.LEGENDARY, "Attack up", AbilityType.Support);
+            
+            Console.WriteLine(mage.ListAbilities(mage.AbilityDictionary.Values.ToList()));
             
             Console.WriteLine();
             
-            mage.TakeDamage(30);
-            rogue.TakeDamage(30);
-            warrior.TakeDamage(50);
-            warrior.TakeDamage(30);
-
+            mage.EquipAbility(fireball);
+            mage.EquipAbility(iceShield);
+            mage.EquipAbility(megaHeal);
+            mage.EquipAbility(attackUp);
+            
             Console.WriteLine();
             
-            rogue.TakeDamage(200);
-            rogue.Attack();
-            rogue.TakeDamage(30);
+            mage.EquipAbility(fireball);
+
+            Console.WriteLine();
+
+            Console.WriteLine(mage.ListAbilities(mage.AbilityDictionary.Values.ToList()));
+
+            Console.WriteLine();
+
+            mage.TakeDamage(60);
+            Console.WriteLine(mage.ToString());
+            mage.CastAbility(megaHeal);
+            Console.WriteLine(mage.ToString());
+            
+            Console.WriteLine();
+            
+            Console.WriteLine(mage.ToString());
+            mage.CastAbility(iceShield);
+            Console.WriteLine(mage.ToString());
+            mage.CastAbility(fireball);
+            Console.WriteLine(mage.ToString());
+            
+            Console.WriteLine();
+
+            mage.CastAbility(attackUp);
         }
     }
 }
