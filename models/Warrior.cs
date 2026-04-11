@@ -17,6 +17,7 @@ public class Warrior : ACharacter
         MaxHp = 150;
         CurrentHp = MaxHp;
         Power = 30;
+        Defense = 15;
         Armor = 40;
     }
     
@@ -29,7 +30,7 @@ public class Warrior : ACharacter
             Console.WriteLine(defDamageMSG, Name);
             return 0;
         }
-        int actualDamage = Math.Max(0, damage - Armor);
+        int actualDamage = Math.Max(0, damage - Defense - Armor);
         CurrentHp = Math.Max(0, CurrentHp - actualDamage);
         Console.WriteLine(damageMSG, Name, damage, Armor, actualDamage, CurrentHp, MaxHp);
         return CurrentHp;
