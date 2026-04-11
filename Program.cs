@@ -1,4 +1,5 @@
-﻿using BLOC3.PP7_HeroEngine.models;
+﻿using System.Net.Http.Headers;
+using BLOC3.PP7_HeroEngine.models;
 
 namespace BLOC3.PP7_HeroEngine
 {
@@ -6,24 +7,32 @@ namespace BLOC3.PP7_HeroEngine
     {
         public static void Main()
         {
-            Warrior warrior = new Warrior("Link", "'Hyaa!'");
+            ACharacter warrior = new Warrior("Link", "'Hyaa!'");
+            ACharacter mage = new Mage("Ela", 40);
+            ACharacter rogue = new Rogue("Elding", 10);
+
             Console.WriteLine(warrior.Greeting());
-            warrior.Attack();
-            warrior.TakeDamage(50);
-
-            Console.WriteLine();
-            
-            Mage mage = new Mage("Ela", 40);
             Console.WriteLine(mage.Greeting());
+            Console.WriteLine(rogue.Greeting());
+
+            Console.WriteLine();
+            
+            warrior.Attack();
             mage.Attack();
-            mage.TakeDamage(50);
+            rogue.Attack();
             
             Console.WriteLine();
+            
+            mage.TakeDamage(30);
+            rogue.TakeDamage(30);
+            warrior.TakeDamage(50);
+            warrior.TakeDamage(30);
 
-            Rogue rogue = new Rogue("Elding", 10);
-            Console.WriteLine(rogue.Greeting());
+            Console.WriteLine();
+            
+            rogue.TakeDamage(200);
             rogue.Attack();
-            rogue.TakeDamage(50);
+            rogue.TakeDamage(30);
         }
     }
 }
