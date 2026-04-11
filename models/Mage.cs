@@ -1,6 +1,6 @@
 ﻿namespace BLOC3.PP7_HeroEngine.models;
 
-public class Mage : AHero
+public class Mage : ACharacter
 {
     public const string toStringMSG = "| Mana: {0}/{1} | Arch level: {2}";
     
@@ -10,8 +10,6 @@ public class Mage : AHero
 
     public Mage(string name, int maxMana) : base(name)
     {
-        /*if (level > 1) MaxMana = (int)(baseMaxMana + baseMaxMana * 0.1 * (level - 1));
-        else MaxMana = baseMaxMana;*/
         MaxHp = 200;
         CurrentHp = MaxHp;
         Power = 20;
