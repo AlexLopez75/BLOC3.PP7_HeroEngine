@@ -4,9 +4,9 @@ public class Minion : AEnemy
 {
     public Minion(string name) : base(name)
     {
-        MaxHp = 50;
+        MaxHp = 100;
         CurrentHp = MaxHp;
-        Power = 15;
-        Defense = 5;
+        Power = 20;
+        Defense = 10;
     }
 }

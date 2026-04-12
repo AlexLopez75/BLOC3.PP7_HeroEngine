@@ -1,5 +1,8 @@
 ﻿namespace BLOC3.PP7_HeroEngine.models;
 
+/// <summary>
+/// Manages the turn-based combat system between a group of heroes and enemies.
+/// </summary>
 public class BattleEngine
 {
     private const string separator = "======================================================";
@@ -13,14 +16,24 @@ public class BattleEngine
     private List<ACharacter> _heroes;
     private List<ACharacter> _enemies;
     private int _countRound;
-
+    private BattleStatistics _stats;
+    
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BattleEngine"/> class with the specified combatants.
+    /// </summary>
+    /// <param name="heroes">The list of heroes participating in the battle.</param>
+    /// <param name="enemies">The list of enemies participating in the battle.</param>
     public BattleEngine(List<ACharacter> heroes, List<ACharacter> enemies)
     {
         _heroes = heroes;
         _enemies = enemies;
         _countRound = 1;
+        _stats = new BattleStatistics();
     }
 
+    /// <summary>
+    /// Starts the main battle loop. The battle continues round by round until either all heroes or all enemies are defeated.
+    /// </summary>
     public void StartBattle()
     {
         BattleLogger.Initialize();
@@ -37,6 +50,9 @@ public class BattleEngine
         AnounceWinner();
     }
 
+    /// <summary>
+    /// Executes a single round of combat. Determines turn order based on initiative and processes each combatant's attack.
+    /// </summary>
     private void PlayRound()
     {
         BattleLogger.Log(string.Format(roundMSG, _countRound));
@@ -58,11 +74,21 @@ public class BattleEngine
             if (target != null)
             {
                 int damage = combatant.Attack();
+                int hpBefore = target.CurrentHp;
                 target.TakeDamage(damage);
+                int actualDamageDealt = hpBefore - target.CurrentHp;
+                _stats.RecordDamage(combatant, actualDamageDealt);
+                
+                if (target.IsDefeated) _stats.RecordEnemyDefeat(target, _countRound);
             }
         }
     }
 
+    /// <summary>
+    /// Determines the target for the current attacking combatant.
+    /// </summary>
+    /// <param name="combatant">The character whose turn it is to attack.</param>
+    /// <returns>The first available alive enemy if the combatant is a hero, or the first available alive hero if the combatant is an enemy. Returns <c>null</c> if no targets are valid.</returns>
     private ACharacter GetTarget(ACharacter combatant)
     {
         if (_heroes.Contains(combatant))
@@ -75,6 +101,10 @@ public class BattleEngine
         }
     }  
     
+    /// <summary>
+    /// Checks whether the battle has reached a conclusion.
+    /// </summary>
+    /// <returns><c>true</c> if all heroes or all enemies are defeated; otherwise, <c>false</c>.</returns>
     public bool IsBattleFinished()
     {
         bool allHeroesDefeated = _heroes.All(h => h.IsDefeated);
@@ -82,7 +112,10 @@ public class BattleEngine
 
         return allHeroesDefeated || allEnemiesDefeated;
     }
-
+    
+    /// <summary>
+    /// Logs the final result of the battle and applies experience or level-ups to surviving heroes if they win.
+    /// </summary>
     private void AnounceWinner()
     {
         BattleLogger.Log("");
@@ -108,5 +141,7 @@ public class BattleEngine
             BattleLogger.Log(enemyWinMSG);
         }
         BattleLogger.Log(separator);
+        
+        _stats.PrintStatistics();
     }
 }
