@@ -90,6 +90,7 @@
 
 ======================================================
                    THE HEROES WIN!                    
+======================================================
 [SYSTEM] The experience of the battle makes the suvivors stronger!
 [SYSTEM] Grog levelled up to Level 2!
 [SYSTEM] Merlin levelled up to Level 2!
@@ -98,6 +99,6 @@
 ======================================================
                   BATTLE STATISTICS                   
 ======================================================
-- Total damage dealt by the heroes: 350
-- Most effective hero (most damage dealt): Merlin (250 damage)
-- Fastest enemy defeated: Elite Segfault (defeated in round 6)
+[SYSTEM] Total damage dealt by the heroes: 350
+[SYSTEM] Most effective hero (most damage dealt): Merlin (250 damage)
+[SYSTEM] Fastest enemy defeated: Elite Segfault (defeated in round 6)

@@ -7,49 +7,30 @@ namespace BLOC3.PP7_HeroEngine
     public class Program
     {
         public static void Main()
-        {
-            Mage mage = new Mage("Ela");
+        {// --- 1. PREPARACIÓN DE LOS HÉROES ---
+            Warrior grog = new Warrior("Grog", "¡Por la horda!");
+            Mage merlin = new Mage("Merlin");
             
-            Ability fireball = new Ability(RarityType.RARE, "Fireball", AbilityType.Attack);
-            Ability iceShield = new Ability(RarityType.COMMON, "Ice shield", AbilityType.Defense);
-            Ability megaHeal = new Ability(RarityType.EPIC, "Mega heal", AbilityType.Healing);
-            Ability attackUp = new Ability(RarityType.LEGENDARY, "Attack up", AbilityType.Support);
+            // Equipamos al mago con magia ofensiva y curativa
+            merlin.EquipAbility(new Ability(RarityType.EPIC, "Bola de Fuego", AbilityType.Attack)); // Cost: 25
+            merlin.EquipAbility(new Ability(RarityType.COMMON, "Cura Menor", AbilityType.Healing)); // Cost: 5
+            merlin.EquipAbility(new Ability(RarityType.RARE, "Aura Arcana", AbilityType.Support) { Cost = 30, AbilityPower = 15 });
             
-            Console.WriteLine(mage.ListAbilities(mage.AbilityDictionary.Values.ToList()));
+            BattleLogger.Log("");
             
-            Console.WriteLine();
-            
-            mage.EquipAbility(fireball);
-            mage.EquipAbility(iceShield);
-            mage.EquipAbility(megaHeal);
-            mage.EquipAbility(attackUp);
-            
-            Console.WriteLine();
-            
-            mage.EquipAbility(fireball);
+            // --- 2. PREPARACIÓN DE LOS ENEMIGOS ---
+            // Recordatorio de stats: Elite(120 HP, 25 Pwr, 15 Def) | Minion(50 HP, 15 Pwr, 5 Def)
+            Elite elite = new Elite("Elite Segfault");
+            Minion minion = new Minion("Minion Bug");
 
-            Console.WriteLine();
+            // --- 3. CREACIÓN DE BANDO Y MOTOR ---
+            List<ACharacter> heroes = new List<ACharacter> { grog, merlin };
+            List<ACharacter> enemies = new List<ACharacter> { elite, minion };
 
-            Console.WriteLine(mage.ListAbilities(mage.AbilityDictionary.Values.ToList()));
+            BattleEngine engine = new BattleEngine(heroes, enemies);
 
-            Console.WriteLine();
-
-            mage.TakeDamage(60);
-            Console.WriteLine(mage.ToString());
-            mage.CastAbility(megaHeal);
-            Console.WriteLine(mage.ToString());
-            
-            Console.WriteLine();
-            
-            Console.WriteLine(mage.ToString());
-            mage.CastAbility(iceShield);
-            Console.WriteLine(mage.ToString());
-            mage.CastAbility(fireball);
-            Console.WriteLine(mage.ToString());
-            
-            Console.WriteLine();
-
-            mage.CastAbility(attackUp);
+            // --- 4. ¡QUE COMIENCE LA BATALLA! ---
+            engine.StartBattle();
         }
     }
 }
