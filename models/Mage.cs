@@ -39,14 +39,121 @@ public class Mage : ACharacter, IAbility
     }
 
     public override string ToString() => base.ToString() + String.Format(toStringMSG, CurrentMana, MaxMana, ArchLevel);
+    
+    /// <summary>
+    /// Executes the Mage's combat turn automatically based on current health, mana, and equipped abilities.
+    /// </summary>
+    /// <remarks>
+    /// The attack logic follows a strict priority system:
+    /// <list type="number">
+    /// <item><description><b>Survival:</b> If HP drops below 40%, attempts to cast the highest-power Healing ability available.</description></item>
+    /// <item><description><b>Tactical:</b> If Mana is above 70%, attempts to cast a Defense or Support ability to buff stats.</description></item>
+    /// <item><description><b>Offense:</b> Attempts to cast the highest-power Attack ability.</description></item>
+    /// <item><description><b>Fallback:</b> If no abilities are equipped or there is insufficient mana, performs a basic physical attack.</description></item>
+    /// </list>
+    /// </remarks>
+    /// <returns>
+    /// The amount of damage dealt to an opponent. Returns <c>0</c> if the Mage is defeated, or if the turn was spent healing or buffing instead of attacking.
+    /// </returns>
+    public override int Attack()
+    {
+        if (IsDefeated)
+        {
+            Console.WriteLine(defAttackMSG, Name);
+            return 0;
+        }
+        
+        //First, looks to heal if health is below 40%
+        if (CurrentHp < MaxHp * 0.4)
+        {
+            var healAbility = AbilityDictionary.Values
+                .Where(a => a.Type == AbilityType.Healing && CurrentMana >= a.Cost)
+                .OrderByDescending(a => a.AbilityPower)
+                .FirstOrDefault();
+
+            if (healAbility != null)
+            {
+                CurrentMana -= healAbility.Cost;
+                Console.WriteLine(abilityActivationMSG, healAbility.Name, healAbility.Rarity);
+                
+                CurrentHp = Math.Min(MaxHp, CurrentHp + healAbility.AbilityPower);
+                Console.WriteLine(abilityHealMSG, Name, healAbility.AbilityPower);
+                
+                return 0;
+            }
+        }
+
+        //If has greater than 70% of mana, tries to buff himself.
+        if (CurrentMana > MaxMana * 0.7)
+        {
+            var supportAbility = AbilityDictionary.Values
+                .Where(a => (a.Type == AbilityType.Defense || a.Type == AbilityType.Support) && CurrentMana >= a.Cost)
+                .FirstOrDefault();
+
+            if (supportAbility != null)
+            {
+                CurrentMana -= supportAbility.Cost;
+                Console.WriteLine(abilityActivationMSG, supportAbility.Name, supportAbility.Rarity);
+
+                if (supportAbility.Type == AbilityType.Defense)
+                {
+                    Defense += supportAbility.AbilityPower;
+                    Console.WriteLine(abilityDefenseMSG, Name, supportAbility.AbilityPower);
+                }
+                else
+                {
+                    Power += supportAbility.AbilityPower;
+                    Console.WriteLine(abilitySupportMSG, Name);
+                }
+                return 0;
+            }
+        }
+        
+        //If not heal or buff, attacks
+        var attackAbility =  AbilityDictionary.Values
+            .Where(a => a.Type == AbilityType.Attack && CurrentMana >= a.Cost)
+            .OrderByDescending(a => a.AbilityPower)
+            .FirstOrDefault();
+
+        if (attackAbility != null)
+        {
+            CurrentMana -= attackAbility.Cost;
+            Console.WriteLine(abilityActivationMSG, attackAbility.Name, attackAbility.Rarity);
+            int totalDamage = Power + attackAbility.AbilityPower;
+            Console.WriteLine(abilityAttackMSG, Name, totalDamage);
+            return totalDamage;
+        }
+        
+        if (AbilityDictionary.Count == 0) //If equipped abilities, normal attack.
+        {
+            Console.WriteLine(noAbilitiesMSG, Name);
+        }
+        else
+        {
+            //Searches the best attack regardless of mana to say why it didn't use it
+            var bestAttack = AbilityDictionary.Values
+                .Where(a => a.Type == AbilityType.Attack)
+                .OrderByDescending(a => a.AbilityPower)
+                .FirstOrDefault();
+            
+            //If exists, it didn't laucnh beacuse Cost > CurrentMana
+            if (bestAttack != null)
+            {
+                Console.WriteLine(notEnoughManaMSG, Name, bestAttack.Name, bestAttack.Cost, CurrentMana);
+            }
+        }
+        
+        //If not enough mana or equipped abilities, normal attack.
+        return base.Attack();
+    }
 
     /// <inheritdoc />
-    public void CastAbility(Ability ability)
+    public int CastAbility(Ability ability)
     {
         if (CurrentMana < ability.Cost)
         {
             Console.WriteLine(notEnoughManaMSG, Name, ability.Name, ability.Cost, CurrentMana);
-            return;
+            return 0;
         }
         
         CurrentMana -= ability.Cost;
@@ -58,7 +165,7 @@ public class Mage : ACharacter, IAbility
             case AbilityType.Attack:
                 int totalDamage = Power + ability.AbilityPower;
                 Console.WriteLine(abilityAttackMSG, Name, totalDamage);
-                break;
+                return totalDamage;
             case AbilityType.Defense:
                 Defense += ability.AbilityPower;
                 Console.WriteLine(abilityDefenseMSG, Name, ability.AbilityPower);
@@ -68,10 +175,12 @@ public class Mage : ACharacter, IAbility
                 Console.WriteLine(abilityHealMSG, Name, ability.AbilityPower);
                 break;
             case AbilityType.Support:
-                int attackBuff = Power * (ability.AbilityPower/10);
+                Power += ability.AbilityPower;
                 Console.WriteLine(abilitySupportMSG, Name);
                 break;
         }
+
+        return base.Attack();
     }
 
     /// <inheritdoc />

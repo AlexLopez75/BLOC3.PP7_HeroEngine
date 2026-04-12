@@ -37,7 +37,7 @@ public abstract class ACharacter
     /// <returns>The total amount of damage the hero inflicts in this attack.</returns>
     public virtual int Attack()
     {
-        if (CurrentHp <= 0)
+        if (IsDefeated)
         {
             Console.WriteLine(defAttackMSG, Name);
             return 0;
@@ -53,7 +53,7 @@ public abstract class ACharacter
     /// <returns>The hero's remaining health points after the impact, or the effective damage taken (depending on the derived class implementation).</returns>
     public virtual int TakeDamage(int damage)
     {
-        if (CurrentHp <= 0)
+        if (IsDefeated)
         {
             Console.WriteLine(defDamageMSG, Name);
             return 0;

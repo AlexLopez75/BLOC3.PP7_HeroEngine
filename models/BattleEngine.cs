@@ -39,8 +39,10 @@ public class BattleEngine
 
         foreach (var combatant in turnOrder)
         {
-            if (IsBattleFinished()) break; //If combat ends in the middle of the round, exit.}
-
+            if (IsBattleFinished()) break; //If combat ends in the middle of the round, exit.
+            
+            if (combatant.IsDefeated) continue; //Prevents combatants from attacking while defeated.
+            
             ACharacter target = GetTarget(combatant);
 
             if (target != null)
@@ -55,11 +57,11 @@ public class BattleEngine
     {
         if (_heroes.Contains(combatant))
         {
-            return _enemies.FirstOrDefault(e => e.IsDefeated);
+            return _enemies.FirstOrDefault(e => !e.IsDefeated);
         }
         else
         {
-            return _heroes.FirstOrDefault(h => h.IsDefeated);
+            return _heroes.FirstOrDefault(h => !h.IsDefeated);
         }
     }  
     
@@ -74,7 +76,7 @@ public class BattleEngine
     private void AnounceWinner()
     {
         Console.WriteLine(separator);
-        if (_heroes.All(h => !h.IsDefeated))
+        if (_heroes.All(e => !e.IsDefeated))
         {
             Console.WriteLine(heroWinMSG);
         }
