@@ -7,9 +7,9 @@ public class BattleStatistics
 {
     private const string separator = "======================================================";
     private const string statisticsMSG = "                  BATTLE STATISTICS                   ";
-    private const string totalDamageMSG = "- Total damage dealt by the heroes: {0}";
-    private const string effectiveHeroMSG = "- Most effective hero (most damage dealt): {0} ({1} damage)";
-    private const string fastestDefeatMSG = "- Fastest enemy defeated: {0} (defeated in round {1})";
+    private const string totalDamageMSG = "[SYSTEM] Total damage dealt by the heroes: {0}";
+    private const string effectiveHeroMSG = "[SYSTEM] Most effective hero (most damage dealt): {0} ({1} damage)";
+    private const string fastestDefeatMSG = "[SYSTEM] Fastest enemy defeated: {0} (defeated in round {1})";
     
     public int TotalDamageInflicted { get; private set; } = 0;
     private Dictionary<string, int> HeroDamage = new Dictionary<string, int>();

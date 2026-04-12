@@ -14,7 +14,7 @@ public class Mage : AHero, IAbility
     private const string abilityHealMSG = "{0} heals {1} damage.";
     private const string abilitySupportMSG = "{0} strenghtens itself.";
     private const string noAbilitiesMSG = "{0} has no abilities equiped.";
-    private const string separator = "======================================================";
+    private const string separator = "==================================================================";
     private const string abilitiesTitleMSG = "{0}'s Abilities";
     private const string abilityRepeat = "[SYSTEM] {0} has already '{1}' equiped";
     private const string abilityEquip = "[SYSTEM] {0} equipped '{1}'";

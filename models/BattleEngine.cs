@@ -123,6 +123,7 @@ public class BattleEngine
         if (_enemies.All(e => e.IsDefeated))
         {
             BattleLogger.Log(heroWinMSG);
+            BattleLogger.Log(separator);
             BattleLogger.Log(expLevelUPMSG);
             foreach (var hero in _heroes)
             {
