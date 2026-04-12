@@ -1,10 +1,10 @@
 ﻿namespace BLOC3.PP7_HeroEngine.models;
 
-public class Rogue : ACharacter
+public class Rogue : AHero
 {
-    public const string toStringMSG = "| Damage multiplier: {0} | Daggers: {1}";
-    public const string defAttackMSG = "{0} is defeated and can't attack!";
-    public const string attackMSG = "{0} attacks! -> Base damage: {1}, Multiplier: {2} -> Deals {3} damage.";
+    private const string toStringMSG = "| Damage multiplier: {0} | Daggers: {1}";
+    private const string defAttackMSG = "{0} is defeated and can't attack!";
+    private const string attackMSG = "{0} attacks! -> Base damage: {1}, Multiplier: {2} -> Deals {3} damage.";
 
     public int MultDamage { get; set; }
     public int NumDaggers { get; set; }
@@ -25,10 +25,10 @@ public class Rogue : ACharacter
     {
         if (CurrentHp <= 0)
         {
-            Console.WriteLine(defAttackMSG, Name);
+            BattleLogger.Log(string.Format(defAttackMSG, DisplayName));
             return 0;
         }
-        Console.WriteLine(attackMSG, Name, Power, MultDamage, Power * MultDamage);
+        BattleLogger.Log(string.Format(attackMSG, DisplayName, Power, MultDamage, Power * MultDamage));
         return Power * MultDamage;   
     }
 }

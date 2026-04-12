@@ -11,7 +11,7 @@ public interface IAbility
     /// Casts the specified ability, applying its effects and consuming any required resources.
     /// </summary>
     /// <param name="ability">The <see cref="Ability"/> to cast.</param>
-    public void CastAbility(Ability ability);
+    public int CastAbility(Ability ability);
     
     /// <summary>
     /// Generates a formatted string of the provided abilities.

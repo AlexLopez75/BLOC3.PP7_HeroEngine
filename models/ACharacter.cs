@@ -6,10 +6,12 @@ public abstract class ACharacter
     public const string defAttackMSG = "{0} is defeated and can't attack!";
     public const string attackMSG = "{0} attacks! Deals {1} damage.";
     public const string defDamageMSG = "{0} is defeated and can't receive damage!";
-    public const string damageMSG = "{0} receives {1} damage. | HP: {2}/{3}";
+    public const string damageMSG = "{0} receives {1} damage -> Defense: {2} -> Actual damage: {3} | {4}/{5}";
     
     public string Name { get; set; }
-    protected int Level { get; set; }
+    public abstract string Faction { get; }
+    public string DisplayName => $"[{Faction}] {Name}";
+    public int Level { get; set; }
     public int CurrentHp { get; set; }
     public int MaxHp { get; set; }
     protected int Power { get; set; }
@@ -23,7 +25,7 @@ public abstract class ACharacter
         Level = 1;
     }
 
-    public override string ToString() => String.Format(toStringMSG, GetType().Name, Name, Level, CurrentHp, MaxHp, Power, Defense);
+    public override string ToString() => String.Format(toStringMSG, GetType().Name, DisplayName, Level, CurrentHp, MaxHp, Power, Defense);
 
     /// <summary>
     /// Gets the hero's characteristic greeting or introduction phrase.
@@ -37,12 +39,12 @@ public abstract class ACharacter
     /// <returns>The total amount of damage the hero inflicts in this attack.</returns>
     public virtual int Attack()
     {
-        if (CurrentHp <= 0)
+        if (IsDefeated)
         {
-            Console.WriteLine(defAttackMSG, Name);
+            BattleLogger.Log(string.Format(defAttackMSG, DisplayName));
             return 0;
         }
-        Console.WriteLine(attackMSG, Name, Power);
+        BattleLogger.Log(string.Format(attackMSG, DisplayName, Power));
         return Power;   
     }
 
@@ -53,26 +55,14 @@ public abstract class ACharacter
     /// <returns>The hero's remaining health points after the impact, or the effective damage taken (depending on the derived class implementation).</returns>
     public virtual int TakeDamage(int damage)
     {
-        if (CurrentHp <= 0)
+        if (IsDefeated)
         {
-            Console.WriteLine(defDamageMSG, Name);
+            BattleLogger.Log(string.Format(defDamageMSG, DisplayName));
             return 0;
         }
         int actualDamage = Math.Max(0, damage - Defense);
         CurrentHp = Math.Max(0, CurrentHp - actualDamage);
-        Console.WriteLine(damageMSG, Name, actualDamage, CurrentHp, MaxHp);
+        BattleLogger.Log(string.Format(damageMSG, DisplayName, damage, Defense, actualDamage, CurrentHp, MaxHp));
         return CurrentHp;
-    }
-    
-    /// <summary>
-    /// Upgrades MaxHp and Power values.
-    /// </summary>
-    public void LevelUp()
-    {
-        Level++;
-        MaxHp = (int)(MaxHp + MaxHp * 0.2 * (Level - 1));
-        Power = (int)(Power + Power * 0.1 * (Level - 1));
-        Defense = (int)(Defense + Defense * 0.1 * (Level - 1));
-        CurrentHp = MaxHp;
     }
 }
