@@ -40,6 +40,7 @@ public class Mage : ACharacter, IAbility
 
     public override string ToString() => base.ToString() + String.Format(toStringMSG, CurrentMana, MaxMana, ArchLevel);
 
+    /// <inheritdoc />
     public void CastAbility(Ability ability)
     {
         if (CurrentMana < ability.Cost)
@@ -73,6 +74,7 @@ public class Mage : ACharacter, IAbility
         }
     }
 
+    /// <inheritdoc />
     public string ListAbilities(List<Ability> listAbilities)
     {
         if (listAbilities == null || listAbilities.Count == 0)
@@ -92,6 +94,7 @@ public class Mage : ACharacter, IAbility
         return sb.ToString();
     }
     
+    /// <inheritdoc />
     public void EquipAbility(Ability newAbility)
     {
         if (!AbilityDictionary.TryAdd(newAbility.Name, newAbility)) //If Name already exists, TryAdd returns false.
