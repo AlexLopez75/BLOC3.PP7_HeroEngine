@@ -1,0 +1,39 @@
+======================================================
+               BATTLE LOG INITIALIZED              
+======================================================
+
+======================================================
+                    BATTLE STARTS                     
+======================================================
+
+============== BATTLE LOG - Round 1 ===============
+[HERO] Activating 'Aura Arcana' [RARE]...
+[HERO] Merlin strenghtens itself.
+[ENEMY] Elite Segfault receives 0 damage -> Defense: 20 -> Actual damage: 0 | 100/100
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 90/100
+[ENEMY] Elite Segfault attacks! Deals 20 damage.
+[HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+[ENEMY] Minion Bug attacks! Deals 15 damage.
+[HERO] Grog receives 15 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+
+============== BATTLE LOG - Round 2 ===============
+[HERO] Activating 'Bola de Fuego' [EPIC]...
+[HERO] Merlin deals massive damage -> Total damage: 100
+[ENEMY] Elite Segfault receives 100 damage -> Defense: 20 -> Actual damage: 80 | 10/100
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 0/100
+[ENEMY] Minion Bug attacks! Deals 15 damage.
+[HERO] Grog receives 15 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+
+============== BATTLE LOG - Round 3 ===============
+[HERO] Activating 'Bola de Fuego' [EPIC]...
+[HERO] Merlin deals massive damage -> Total damage: 100
+[ENEMY] Minion Bug receives 100 damage -> Defense: 5 -> Actual damage: 95 | 0/50
+
+======================================================
+                   THE HEROES WIN!                    
+[SYSTEM] The experience of the battle makes the suvivors stronger!
+[SYSTEM] Grog levelled up to Level 2!
+[SYSTEM] Merlin levelled up to Level 2!
+======================================================

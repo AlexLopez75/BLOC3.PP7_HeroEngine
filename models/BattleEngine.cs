@@ -2,11 +2,13 @@
 
 public class BattleEngine
 {
-    private const string separator = "\n======================================================";
-    private const string battleStartMSG = "                       BATTLE STARTS                     ";
+    private const string separator = "======================================================";
+    private const string battleStartMSG = "                    BATTLE STARTS                     ";
     private const string roundMSG = "\n============== BATTLE LOG - Round {0} ===============";
-    private const string heroWinMSG = "                      THE HEROES WIN!                    ";
+    private const string heroWinMSG = "                   THE HEROES WIN!                    ";
     private const string enemyWinMSG = "                THE PRIMORDIAL BUG WINS!                 ";
+    private const string expLevelUPMSG = "[SYSTEM] The experience of the battle makes the suvivors stronger!";
+    private const string heroLevelUPMSG = "[SYSTEM] {0} levelled up to Level {1}!";
     
     private List<ACharacter> _heroes;
     private List<ACharacter> _enemies;
@@ -21,6 +23,12 @@ public class BattleEngine
 
     public void StartBattle()
     {
+        BattleLogger.Initialize();
+        
+        BattleLogger.Log(separator);
+        BattleLogger.Log(battleStartMSG);
+        BattleLogger.Log(separator);
+        
         while (!IsBattleFinished())
         {
             PlayRound();
@@ -31,6 +39,8 @@ public class BattleEngine
 
     private void PlayRound()
     {
+        BattleLogger.Log(string.Format(roundMSG, _countRound));
+        
         var allCombatants = new List<ACharacter>();
         allCombatants.AddRange(_heroes.Where(h => !h.IsDefeated));
         allCombatants.AddRange(_enemies.Where(e => !e.IsDefeated));
@@ -75,15 +85,28 @@ public class BattleEngine
 
     private void AnounceWinner()
     {
-        Console.WriteLine(separator);
-        if (_heroes.All(e => !e.IsDefeated))
+        BattleLogger.Log("");
+        BattleLogger.Log(separator);
+        if (_enemies.All(e => e.IsDefeated))
         {
-            Console.WriteLine(heroWinMSG);
+            BattleLogger.Log(heroWinMSG);
+            BattleLogger.Log(expLevelUPMSG);
+            foreach (var hero in _heroes)
+            {
+                if (!hero.IsDefeated)
+                {
+                    if (hero is AHero survivingHero)
+                    {
+                        survivingHero.LevelUp();
+                        BattleLogger.Log(String.Format(heroLevelUPMSG, survivingHero.Name, survivingHero.Level));
+                    }
+                }
+            }
         }
         else
         {
-            Console.WriteLine(enemyWinMSG);
+            BattleLogger.Log(enemyWinMSG);
         }
-        Console.WriteLine(separator);
+        BattleLogger.Log(separator);
     }
 }

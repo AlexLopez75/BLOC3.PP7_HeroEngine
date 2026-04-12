@@ -2,11 +2,11 @@
 
 namespace BLOC3.PP7_HeroEngine.models;
 
-public class Warrior : ACharacter
+public class Warrior : AHero
 {
-    public const string toStringMSG = "| Armor: {0} | Battle Cry: {1}";
-    public const string defDamageMSG = "{0} is defeated and can't receive damage!";
-    public const string damageMSG = "{0} receives {1} damage. -> Armor absorbs {2} damage -> Total damage: {3} | HP: {4}/{5}";
+    private const string toStringMSG = "| Armor: {0} | Battle Cry: {1}";
+    private const string defDamageMSG = "{0} is defeated and can't receive damage!";
+    private const string damageMSG = "{0} receives {1} damage. -> Defense: {2}, Armor absorbs {3} damage -> Total damage: {4} | HP: {5}/{6}";
     
     public int Armor { get; set; }
     public string BattleCry { get; set; }
@@ -27,12 +27,12 @@ public class Warrior : ACharacter
     {
         if (CurrentHp <= 0)
         {
-            Console.WriteLine(defDamageMSG, Name);
+            BattleLogger.Log(string.Format(defDamageMSG, DisplayName));
             return 0;
         }
         int actualDamage = Math.Max(0, damage - Defense - Armor);
         CurrentHp = Math.Max(0, CurrentHp - actualDamage);
-        Console.WriteLine(damageMSG, Name, damage, Armor, actualDamage, CurrentHp, MaxHp);
+        BattleLogger.Log(string.Format(damageMSG, DisplayName, damage, Defense, Armor, actualDamage, CurrentHp, MaxHp));
         return CurrentHp;
     }
 }

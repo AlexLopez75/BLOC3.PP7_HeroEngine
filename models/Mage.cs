@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using BLOC3.PP7_HeroEngine.enums;
 using BLOC3.PP7_HeroEngine.interfaces;
 
 namespace BLOC3.PP7_HeroEngine.models;
 
-public class Mage : ACharacter, IAbility
+public class Mage : AHero, IAbility
 {
-    public const string toStringMSG = "| Mana: {0}/{1} | Arch level: {2}";
-    public const string notEnoughManaMSG = "{0} can't cast '{1}' beacuse it doesn't have enough mana! (Needs {2}, has {3})";
-    public const string abilityActivationMSG = "Activating '{0}' [{1}]...";
-    public const string abilityAttackMSG = "{0} deals massive damage -> Total damage: {1}";
-    public const string abilityDefenseMSG = "{0} shields itself from {1} damage.";
-    public const string abilityHealMSG = "{0} heals {1} damage.";
-    public const string abilitySupportMSG = "{0} strenghtens itself.";
-    public const string noAbilitiesMSG = "{0} has no abilities equiped.";
-    public const string separator = "--------------------------------------------------------------------";
-    public const string abilitiesTitleMSG = "{0}'s Abilities";
-    public const string abilityRepeat = "[System] {0} has already '{1}' equiped";
-    public const string abilityEquip = "[System] {0} equipped '{1}'";
+    private const string toStringMSG = "| Mana: {0}/{1} | Arch level: {2}";
+    private const string notEnoughManaMSG = "{0} can't cast '{1}' beacuse it doesn't have enough mana! (Needs {2}, has {3})";
+    private const string abilityActivationMSG = "[HERO] Activating '{0}' [{1}]...";
+    private const string abilityAttackMSG = "{0} deals massive damage -> Total damage: {1}";
+    private const string abilityDefenseMSG = "{0} shields itself from {1} damage.";
+    private const string abilityHealMSG = "{0} heals {1} damage.";
+    private const string abilitySupportMSG = "{0} strenghtens itself.";
+    private const string noAbilitiesMSG = "{0} has no abilities equiped.";
+    private const string separator = "======================================================";
+    private const string abilitiesTitleMSG = "{0}'s Abilities";
+    private const string abilityRepeat = "[SYSTEM] {0} has already '{1}' equiped";
+    private const string abilityEquip = "[SYSTEM] {0} equipped '{1}'";
     
     public int CurrentMana { get; set; }
     public int MaxMana { get; set; }
@@ -59,7 +56,7 @@ public class Mage : ACharacter, IAbility
     {
         if (IsDefeated)
         {
-            Console.WriteLine(defAttackMSG, Name);
+            BattleLogger.Log(string.Format(defAttackMSG, DisplayName));
             return 0;
         }
         
@@ -74,16 +71,16 @@ public class Mage : ACharacter, IAbility
             if (healAbility != null)
             {
                 CurrentMana -= healAbility.Cost;
-                Console.WriteLine(abilityActivationMSG, healAbility.Name, healAbility.Rarity);
+                BattleLogger.Log(string.Format(abilityActivationMSG, healAbility.Name, healAbility.Rarity));
                 
                 CurrentHp = Math.Min(MaxHp, CurrentHp + healAbility.AbilityPower);
-                Console.WriteLine(abilityHealMSG, Name, healAbility.AbilityPower);
+                BattleLogger.Log(string.Format(abilityHealMSG, DisplayName, healAbility.AbilityPower));
                 
                 return 0;
             }
         }
 
-        //If has greater than 70% of mana, tries to buff himself.
+        //If it has greater than 70% of mana, tries to buff himself.
         if (CurrentMana > MaxMana * 0.7)
         {
             var supportAbility = AbilityDictionary.Values
@@ -93,17 +90,17 @@ public class Mage : ACharacter, IAbility
             if (supportAbility != null)
             {
                 CurrentMana -= supportAbility.Cost;
-                Console.WriteLine(abilityActivationMSG, supportAbility.Name, supportAbility.Rarity);
+                BattleLogger.Log(string.Format(abilityActivationMSG, supportAbility.Name, supportAbility.Rarity));
 
                 if (supportAbility.Type == AbilityType.Defense)
                 {
                     Defense += supportAbility.AbilityPower;
-                    Console.WriteLine(abilityDefenseMSG, Name, supportAbility.AbilityPower);
+                    BattleLogger.Log(string.Format(abilityDefenseMSG, DisplayName, supportAbility.AbilityPower));
                 }
                 else
                 {
                     Power += supportAbility.AbilityPower;
-                    Console.WriteLine(abilitySupportMSG, Name);
+                    BattleLogger.Log(string.Format(abilitySupportMSG, DisplayName));
                 }
                 return 0;
             }
@@ -118,15 +115,15 @@ public class Mage : ACharacter, IAbility
         if (attackAbility != null)
         {
             CurrentMana -= attackAbility.Cost;
-            Console.WriteLine(abilityActivationMSG, attackAbility.Name, attackAbility.Rarity);
+            BattleLogger.Log(string.Format(abilityActivationMSG, attackAbility.Name, attackAbility.Rarity));
             int totalDamage = Power + attackAbility.AbilityPower;
-            Console.WriteLine(abilityAttackMSG, Name, totalDamage);
+            BattleLogger.Log(string.Format(abilityAttackMSG, DisplayName, totalDamage));
             return totalDamage;
         }
         
         if (AbilityDictionary.Count == 0) //If equipped abilities, normal attack.
         {
-            Console.WriteLine(noAbilitiesMSG, Name);
+            BattleLogger.Log(string.Format(noAbilitiesMSG, DisplayName));
         }
         else
         {
@@ -136,10 +133,10 @@ public class Mage : ACharacter, IAbility
                 .OrderByDescending(a => a.AbilityPower)
                 .FirstOrDefault();
             
-            //If exists, it didn't laucnh beacuse Cost > CurrentMana
+            //If exists, it didn't launch because Cost > CurrentMana
             if (bestAttack != null)
             {
-                Console.WriteLine(notEnoughManaMSG, Name, bestAttack.Name, bestAttack.Cost, CurrentMana);
+                BattleLogger.Log(string.Format(notEnoughManaMSG, DisplayName, bestAttack.Name, bestAttack.Cost, CurrentMana));
             }
         }
         
@@ -152,31 +149,31 @@ public class Mage : ACharacter, IAbility
     {
         if (CurrentMana < ability.Cost)
         {
-            Console.WriteLine(notEnoughManaMSG, Name, ability.Name, ability.Cost, CurrentMana);
+            BattleLogger.Log(string.Format(notEnoughManaMSG, DisplayName, ability.Name, ability.Cost, CurrentMana));
             return 0;
         }
         
         CurrentMana -= ability.Cost;
         
-        Console.WriteLine(abilityActivationMSG, ability.Name, ability.Rarity);
+        BattleLogger.Log(string.Format(abilityActivationMSG, ability.Name, ability.Rarity));
 
         switch (ability.Type)
         {
             case AbilityType.Attack:
                 int totalDamage = Power + ability.AbilityPower;
-                Console.WriteLine(abilityAttackMSG, Name, totalDamage);
+                BattleLogger.Log(string.Format(abilityAttackMSG, DisplayName, totalDamage));
                 return totalDamage;
             case AbilityType.Defense:
                 Defense += ability.AbilityPower;
-                Console.WriteLine(abilityDefenseMSG, Name, ability.AbilityPower);
+                BattleLogger.Log(string.Format(abilityDefenseMSG, DisplayName, ability.AbilityPower));
                 break;
             case AbilityType.Healing:
                 CurrentHp = Math.Min(MaxHp, CurrentHp + ability.AbilityPower);
-                Console.WriteLine(abilityHealMSG, Name, ability.AbilityPower);
+                BattleLogger.Log(string.Format(abilityHealMSG, DisplayName, ability.AbilityPower));
                 break;
             case AbilityType.Support:
                 Power += ability.AbilityPower;
-                Console.WriteLine(abilitySupportMSG, Name);
+                BattleLogger.Log(string.Format(abilitySupportMSG, DisplayName));
                 break;
         }
 
@@ -188,16 +185,16 @@ public class Mage : ACharacter, IAbility
     {
         if (listAbilities == null || listAbilities.Count == 0)
         {
-            return String.Format(noAbilitiesMSG, Name);
+            return String.Format(noAbilitiesMSG, DisplayName);
         }
         
-        var sortedAbilites = listAbilities.OrderBy(a => a.Rarity).ToList();
+        var sortedAbilities = listAbilities.OrderBy(a => a.Rarity).ToList();
         
         StringBuilder sb = new StringBuilder();
         sb.AppendLine(separator);
-        sb.AppendLine(String.Format(abilitiesTitleMSG, Name));
+        sb.AppendLine(String.Format(abilitiesTitleMSG, DisplayName));
         sb.AppendLine(separator);
-        sortedAbilites.ForEach(a => sb.AppendLine(a.ToString()));
+        sortedAbilities.ForEach(a => sb.AppendLine(a.ToString()));
         sb.AppendLine(separator);
         
         return sb.ToString();
@@ -208,11 +205,11 @@ public class Mage : ACharacter, IAbility
     {
         if (!AbilityDictionary.TryAdd(newAbility.Name, newAbility)) //If Name already exists, TryAdd returns false.
         {
-            Console.WriteLine(abilityRepeat, Name, newAbility.Name);
+            BattleLogger.Log(string.Format(abilityRepeat, DisplayName, newAbility.Name));
         }
         else
         {
-            Console.WriteLine(abilityEquip, Name, newAbility.Name);
+            BattleLogger.Log(string.Format(abilityEquip, DisplayName, newAbility.Name));
         }
     }
 }
