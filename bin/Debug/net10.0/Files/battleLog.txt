@@ -7,29 +7,86 @@
 ======================================================
 
 ============== BATTLE LOG - Round 1 ===============
+[ENEMY] Elite Segfault attacks! Deals 50 damage.
+[HERO] Grog receives 50 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
 [HERO] Activating 'Aura Arcana' [RARE]...
 [HERO] Merlin strenghtens itself.
-[ENEMY] Elite Segfault receives 0 damage -> Defense: 20 -> Actual damage: 0 | 100/100
+[ENEMY] Elite Segfault receives 0 damage -> Defense: 20 -> Actual damage: 0 | 250/250
 [HERO] Grog attacks! Deals 30 damage.
-[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 90/100
-[ENEMY] Elite Segfault attacks! Deals 20 damage.
+[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 240/250
+[ENEMY] Minion Bug attacks! Deals 20 damage.
 [HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
-[ENEMY] Minion Bug attacks! Deals 15 damage.
-[HERO] Grog receives 15 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
 
 ============== BATTLE LOG - Round 2 ===============
+[ENEMY] Elite Segfault attacks! Deals 50 damage.
+[HERO] Grog receives 50 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
 [HERO] Activating 'Bola de Fuego' [EPIC]...
 [HERO] Merlin deals massive damage -> Total damage: 100
-[ENEMY] Elite Segfault receives 100 damage -> Defense: 20 -> Actual damage: 80 | 10/100
+[ENEMY] Elite Segfault receives 100 damage -> Defense: 20 -> Actual damage: 80 | 160/250
 [HERO] Grog attacks! Deals 30 damage.
-[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 0/100
-[ENEMY] Minion Bug attacks! Deals 15 damage.
-[HERO] Grog receives 15 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 150/250
+[ENEMY] Minion Bug attacks! Deals 20 damage.
+[HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
 
 ============== BATTLE LOG - Round 3 ===============
+[ENEMY] Elite Segfault attacks! Deals 50 damage.
+[HERO] Grog receives 50 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
 [HERO] Activating 'Bola de Fuego' [EPIC]...
 [HERO] Merlin deals massive damage -> Total damage: 100
-[ENEMY] Minion Bug receives 100 damage -> Defense: 5 -> Actual damage: 95 | 0/50
+[ENEMY] Elite Segfault receives 100 damage -> Defense: 20 -> Actual damage: 80 | 70/250
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 60/250
+[ENEMY] Minion Bug attacks! Deals 20 damage.
+[HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+
+============== BATTLE LOG - Round 4 ===============
+[ENEMY] Elite Segfault attacks! Deals 50 damage.
+[HERO] Grog receives 50 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+[HERO] Merlin can't cast 'Bola de Fuego' beacuse it doesn't have enough mana! (Needs 25, has 0)
+[HERO] Merlin attacks! Deals 35 damage.
+[ENEMY] Elite Segfault receives 35 damage -> Defense: 20 -> Actual damage: 15 | 45/250
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 35/250
+[ENEMY] Minion Bug attacks! Deals 20 damage.
+[HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+
+============== BATTLE LOG - Round 5 ===============
+[ENEMY] Elite Segfault attacks! Deals 50 damage.
+[HERO] Grog receives 50 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+[HERO] Merlin can't cast 'Bola de Fuego' beacuse it doesn't have enough mana! (Needs 25, has 0)
+[HERO] Merlin attacks! Deals 35 damage.
+[ENEMY] Elite Segfault receives 35 damage -> Defense: 20 -> Actual damage: 15 | 20/250
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Elite Segfault receives 30 damage -> Defense: 20 -> Actual damage: 10 | 10/250
+[ENEMY] Minion Bug attacks! Deals 20 damage.
+[HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+
+============== BATTLE LOG - Round 6 ===============
+[ENEMY] Elite Segfault attacks! Deals 50 damage.
+[HERO] Grog receives 50 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+[HERO] Merlin can't cast 'Bola de Fuego' beacuse it doesn't have enough mana! (Needs 25, has 0)
+[HERO] Merlin attacks! Deals 35 damage.
+[ENEMY] Elite Segfault receives 35 damage -> Defense: 20 -> Actual damage: 15 | 0/250
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Minion Bug receives 30 damage -> Defense: 10 -> Actual damage: 20 | 80/100
+[ENEMY] Minion Bug attacks! Deals 20 damage.
+[HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+
+============== BATTLE LOG - Round 7 ===============
+[HERO] Merlin can't cast 'Bola de Fuego' beacuse it doesn't have enough mana! (Needs 25, has 0)
+[HERO] Merlin attacks! Deals 35 damage.
+[ENEMY] Minion Bug receives 35 damage -> Defense: 10 -> Actual damage: 25 | 55/100
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Minion Bug receives 30 damage -> Defense: 10 -> Actual damage: 20 | 35/100
+[ENEMY] Minion Bug attacks! Deals 20 damage.
+[HERO] Grog receives 20 damage. -> Defense: 15, Armor absorbs 40 damage -> Total damage: 0 | HP: 150/150
+
+============== BATTLE LOG - Round 8 ===============
+[HERO] Merlin can't cast 'Bola de Fuego' beacuse it doesn't have enough mana! (Needs 25, has 0)
+[HERO] Merlin attacks! Deals 35 damage.
+[ENEMY] Minion Bug receives 35 damage -> Defense: 10 -> Actual damage: 25 | 10/100
+[HERO] Grog attacks! Deals 30 damage.
+[ENEMY] Minion Bug receives 30 damage -> Defense: 10 -> Actual damage: 20 | 0/100
 
 ======================================================
                    THE HEROES WIN!                    
@@ -37,3 +94,10 @@
 [SYSTEM] Grog levelled up to Level 2!
 [SYSTEM] Merlin levelled up to Level 2!
 ======================================================
+
+======================================================
+                  BATTLE STATISTICS                   
+======================================================
+- Total damage dealt by the heroes: 350
+- Most effective hero (most damage dealt): Merlin (250 damage)
+- Fastest enemy defeated: Elite Segfault (defeated in round 6)

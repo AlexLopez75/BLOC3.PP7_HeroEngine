@@ -4,9 +4,9 @@ public class Boss : AEnemy
 {
     public Boss(string name) : base(name)
     {
-        MaxHp = 300;
+        MaxHp = 600;
         CurrentHp = MaxHp;
-        Power = 45;
-        Defense = 20;
+        Power = 80;
+        Defense = 40;
     }
 }

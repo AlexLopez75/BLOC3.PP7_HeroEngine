@@ -4,9 +4,9 @@ public class Elite : AEnemy
 {
     public Elite(string name) : base(name)
     {
-        MaxHp = 100;
+        MaxHp = 250;
         CurrentHp = MaxHp;
-        Power = 20;
+        Power = 50;
         Defense = 20;
     }
 }
