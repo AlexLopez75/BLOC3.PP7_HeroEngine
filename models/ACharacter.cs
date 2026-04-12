@@ -8,13 +8,15 @@ public abstract class ACharacter
     public const string defDamageMSG = "{0} is defeated and can't receive damage!";
     public const string damageMSG = "{0} receives {1} damage. | HP: {2}/{3}";
     
-    protected string Name { get; set; }
+    public string Name { get; set; }
     protected int Level { get; set; }
-    protected int CurrentHp { get; set; }
-    protected int MaxHp { get; set; }
+    public int CurrentHp { get; set; }
+    public int MaxHp { get; set; }
     protected int Power { get; set; }
     protected int Defense { get; set; }
-
+    public bool IsDefeated => CurrentHp <= 0;
+    public virtual int Initiative => Power + MaxHp + Defense;
+    
     protected ACharacter(string name)
     {
         Name = name;
